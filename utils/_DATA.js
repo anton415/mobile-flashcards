@@ -27,24 +27,26 @@ let decks = {
 /* Helpers */
 export function _getDecks() {
   return new Promise((res, rej) => {
-
+    setTimeout(() => res({...decks}), 1000)
   })
 }
 
-export function _getDeck({ id }) {
+export function _getDeck({ title }) {
   return new Promise((res, rej) => {
-
+    setTimeout(() => res({decks[title]}), 1000)
   })
 }
 
 export function _saveDeckTitle({ title }) {
   return new Promise((res, rej) => {
-
+    setTimeout(() => res({decks[title]}), 1000)
   })
 }
 
 export function _addCardToDeck({ title, card }) {
   return new Promise((res, rej) => {
-
+    setTimeout(() => res({
+      decks[title].questions.push(card)
+    }), 500)
   })
 }
