@@ -1,21 +1,22 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Platform, StatusBar, Button } from 'react-native';
+import Decks from './components/Decks';
+import NewDeck from './components/NewDeck'
+import { createBottomTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
+import { Ionicons } from '@expo/vector-icons';
+import { Constants } from 'expo';
+import { white, purple, pink } from './utils/colors';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+const DecksStack = createStackNavigator({
+  Decks: Decks
+})
+
+const NewDeckStack = createStackNavigator({
+  NewDeck: NewDeck
+})
+
+export default createAppContainer(createBottomTabNavigator({
+    Decks: DecksStack,
+    NewDeck: NewDeckStack
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+))

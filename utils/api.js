@@ -27,6 +27,10 @@ let initData = {
   }
 }
 
+function deckResults(results) {
+  return results === null ? setInitData() : JSON.parse(results)
+}
+
 export function setInitData() {
   AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(initData))
   return initData
@@ -62,5 +66,4 @@ export function addCardToDeck({ title, card }) {
       decks[title].questions.push(card)
       AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks))
     })
-  })
 }
