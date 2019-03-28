@@ -26,7 +26,9 @@ class Deck extends Component {
           title="Add Card"
         />
         <Button
-          onPress={startQuiz}
+          onPress={() => this.props.navigation.navigate('Quiz', {
+            questions: deck.questions
+          })}
           title="Start Quiz"
         />
       </View>
