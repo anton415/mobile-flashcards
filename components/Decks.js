@@ -35,6 +35,7 @@ class Decks extends Component {
                  >
                   <View>
                     <Text>{decks[deck].title}</Text>
+                    <Text>{decks[deck].questions.length} cards</Text>
                   </View>
                 </TouchableOpacity>
               </View>
