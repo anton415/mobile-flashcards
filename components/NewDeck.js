@@ -23,8 +23,15 @@ class NewDeck extends Component {
     return addNewDeckTitle(this.state.inputText)
   }
 
+
+
   render() {
     const { inputText } = this.state
+
+    submit = () => {
+      console.log('submit');
+      console.log('input: ', this.state.inputText);
+    }
 
     return (
       <KeyboardAvoidingView behavior="padding">
@@ -35,7 +42,11 @@ class NewDeck extends Component {
           <TextInput
             onChangeText={inputText => this.setState({ inputText })}
             value={inputText}
-            placeholder={'Enter title'}
+            placeholder={'Deck Title'}
+          />
+          <Button
+            onPress={submit}
+            title="Submit"
           />
         </View>
       </KeyboardAvoidingView>
