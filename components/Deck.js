@@ -9,20 +9,12 @@ class Deck extends Component {
     const { navigation } = this.props
     const deck = navigation.getParam('deck')
 
-    addCard = () => {
-      console.log('add card');
-    }
-
-    startQuiz = () => {
-      console.log('start quiz');
-    }
-
     return (
       <View>
         <Text>{deck.title}</Text>
         <Text>{deck.questions.length} cards</Text>
         <Button
-          onPress={addCard}
+        onPress={() => this.props.navigation.navigate('AddCard')}
           title="Add Card"
         />
         <Button
