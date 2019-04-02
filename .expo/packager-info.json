@@ -2,9 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 1107,
+  "packagerPid": 1008,
   "expoServerNgrokUrl": "https://zm-yea.anonymous.mobile-flashcards.exp.direct",
   "packagerNgrokUrl": "https://packager.zm-yea.anonymous.mobile-flashcards.exp.direct",
-  "ngrokPid": 1136,
+  "ngrokPid": 1034,
   "webpackServerPort": null
 }
