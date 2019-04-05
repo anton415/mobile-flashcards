@@ -1,69 +1,50 @@
 import { AsyncStorage } from 'react-native'
+import { DECK_STORAGE_KEY, setDummyData } from './_decks'
+import { STUDIED_STORAGE_KEY, setStudiedToday } from './_studied'
 
-export const STORAGE_KEY = 'mobile-flashcards:decks'
-
-let initData = {
-  React: {
-    title: 'React',
-    questions: [
-      {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
-      },
-      {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
-    ]
-  },
-  JavaScript: {
-    title: 'JavaScript',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  }
+export function fetchDecks() {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(setInitData())
 }
 
-function deckResults(results) {
-  return results === null ? setInitData() : JSON.parse(results)
-}
-
-export function setInitData() {
-  AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(initData))
-  return initData
-}
-
-export function getDecks() {
-  return AsyncStorage.getItem(STORAGE_KEY)
-    .then(deckResults)
-}
-
-export function getDeck({ title }) {
-  return AsyncStorage.getItem(STORAGE_KEY)
-    .then(deckResults)
-    .then(results => results[title])
-}
-
-export function saveDeckTitle({ title }) {
+export function submitDeck(title, deck) {
   return AsyncStorage.mergeItem(
-    STORAGE_KEY,
+    DECK_STORAGE_KEY,
     JSON.stringify({
-      [title]: {
-        title,
-        questions: []
-      }
+      [title]: deck
     })
   )
 }
 
-export function addCardToDeck({ title, card }) {
-  return AsyncStorage.getItem(STORAGE_KEY)
-    .then(data => {
-      decks = JSON.parse(data)
-      decks[title].questions.push(card)
-      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks))
-    })
+export function addQuestionToDeck(question) {
+  const { deckId, questionBody } = question
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(results => {
+    decks = JSON.parse(results)
+    return {
+      ...decks,
+      [deckId]: {
+        ...decks[deckId],
+        questions:
+          decks[deckId].questions === undefined
+            ? [questionBody]
+            : [...decks[deckId].questions.concat(questionBody)]
+      }
+    }
+  })
+}
+
+export function removeDeck(title) {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(results => {
+    const data = JSON.parse(results)
+    data[title] = undefined
+    delete data[title]
+    AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(data))
+  })
+}
+
+export function submitStudiedToday(studiedToday) {
+  return AsyncStorage.setItem(STUDIED_STORAGE_KEY, JSON.stringify(studiedToday))
+}
+
+export function fetchStudiedToday() {
+  return AsyncStorage.getItem(STUDIED_STORAGE_KEY).then(setStudiedToday())
 }
