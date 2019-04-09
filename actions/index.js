@@ -1,6 +1,6 @@
 export const RECEIVE_DECKS = "RECEIVE_DECKS"
 export const ADD_DECK = "ADD_DECK"
-export const STUDIED_TODAY = "STUDIED_TODAY"
+export const STUDIED = "STUDIED"
 export const ADD_QUESTION = "ADD_QUESTION"
 export const REMOVE_DECK = "REMOVE_DECK"
 
@@ -34,9 +34,9 @@ export function addQuestion(question) {
 }
 
 
-export function setStudiedToday(studiedToday) {
+export function setStudied(studied) {
   return {
-    type: STUDIED_TODAY,
-    studiedToday
+    type: STUDIED,
+    studied
   }
 }

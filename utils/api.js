@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
-import { DECK_STORAGE_KEY, setDummyData } from './_decks'
-import { STUDIED_STORAGE_KEY, setStudiedToday } from './_studied'
+import { DECK_STORAGE_KEY, setInitData } from './_decks'
+import { STUDIED_STORAGE_KEY, setStudied } from './_studied'
 
 export function fetchDecks() {
   return AsyncStorage.getItem(DECK_STORAGE_KEY).then(setInitData())
@@ -41,10 +41,10 @@ export function removeDeck(title) {
   })
 }
 
-export function submitStudiedToday(studiedToday) {
-  return AsyncStorage.setItem(STUDIED_STORAGE_KEY, JSON.stringify(studiedToday))
+export function submitStudied(studied) {
+  return AsyncStorage.setItem(STUDIED_STORAGE_KEY, JSON.stringify(studied))
 }
 
-export function fetchStudiedToday() {
-  return AsyncStorage.getItem(STUDIED_STORAGE_KEY).then(setStudiedToday())
+export function fetchStudied() {
+  return AsyncStorage.getItem(STUDIED_STORAGE_KEY).then(setStudied())
 }
