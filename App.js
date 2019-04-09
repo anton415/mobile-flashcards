@@ -1,29 +1,30 @@
 import React, { Component } from 'react'
-import Decks from './components/Decks'
-import Deck from './components/Deck'
-import NewDeck from './components/NewDeck'
-import Quiz from './components/Quiz'
-import AddCard from './components/AddCard'
-import { createBottomTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
+import { View, StatusBar } from 'react-native'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducers from './reducers'
+import { Constants } from 'expo'
+import MainNavigator from './navigation/MainNavigator'
+import { black } from "./utils/colors";
 
-const DecksStack = createStackNavigator({
-  Decks: Decks,
-  Deck: Deck,
-  Quiz: Quiz,
-  AddCard: AddCard
-})
-
-const NewDeckStack = createStackNavigator({
-  NewDeck: NewDeck
-})
-
-const AppContainer =  createAppContainer(createBottomTabNavigator({
-  Decks: DecksStack,
-  NewDeck: NewDeckStack
-}))
+function UdaciStatusBar({ backgroundColor, ...props }) {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 export default class App extends Component {
+
   render() {
-    return <AppContainer />;
+    return (
+      <Provider store={createStore(reducers)}>
+        <View>
+          <UdaciStatusBar  backgroundColor={black}  barStyle='light-content' />
+          <MainNavigator />
+        </View>
+      </Provider>
+    )
   }
 }
