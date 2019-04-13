@@ -2,11 +2,11 @@ import React from 'react'
 import { Text, TouchableOpacity, StyleSheet, Platform } from 'react-native'
 import { purple, white, green } from '../utils/colors'
 
-export default function ActionButton({ onPress, label }) {
+export default function ActionButton({ action, label, key }) {
   return (
     <TouchableOpacity
       style={styles.submitBtn}
-      onPress={onPress}
+      onPress={action}
     >
       <Text style={styles.submitBtnText}>{label}</Text>
     </TouchableOpacity>
