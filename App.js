@@ -5,7 +5,8 @@ import { createStore } from 'redux'
 import reducers from './reducers'
 import { Constants } from 'expo'
 import MainNavigator from './navigation/MainNavigator'
-import { black } from "./utils/colors";
+import { blue } from './utils/colors'
+import { setLocalNotification } from "./utils/helpers"
 
 function UdaciStatusBar({ backgroundColor, ...props }) {
   return (
@@ -16,12 +17,15 @@ function UdaciStatusBar({ backgroundColor, ...props }) {
 }
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
 
   render() {
     return (
       <Provider store={createStore(reducers)}>
-        <View>
-          <UdaciStatusBar  backgroundColor={black}  barStyle='light-content' />
+        <View style={{ flex: 1 }}>
+          <UdaciStatusBar backgroundColor={blue} barStyle="light-content" />
           <MainNavigator />
         </View>
       </Provider>
