@@ -6,6 +6,7 @@ import reducers from './reducers'
 import { Constants } from 'expo'
 import MainNavigator from './navigation/MainNavigator'
 import { blue } from './utils/colors'
+import { setLocalNotification } from "./utils/helpers"
 
 function UdaciStatusBar({ backgroundColor, ...props }) {
   return (
@@ -16,6 +17,9 @@ function UdaciStatusBar({ backgroundColor, ...props }) {
 }
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
 
   render() {
     return (
