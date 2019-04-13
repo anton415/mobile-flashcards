@@ -39,7 +39,7 @@ class Decks extends Component {
     }
 
     return (
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <HeaderView headerText={"Decks"} />
         <View>
           {decks && Object.keys(decks).length !== 0 ? (
@@ -47,13 +47,15 @@ class Decks extends Component {
               return decks[key] !== null ? (
                 <TouchableOpacity
                   key={key}
+                  style={styles.deck}
                   onPress={() => {
                     Animated.timing(this.state.opacity, {
                       toValue: 1,
                       duration: 1000
                     })
                     return this.props.navigation.navigate("Deck", {
-                      deckId: key
+                      deckId: key,
+
                     })
                   }}
                 >
@@ -74,6 +76,25 @@ class Decks extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: white
+  },
+  deck: {
+    backgroundColor: white,
+    padding: 20,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    shadowRadius: 1,
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 1,
+      height: 1
+    }
+  }
+
 })
 
 function mapStateToProps(state) {
